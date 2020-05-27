@@ -8,7 +8,6 @@ import teste.atri;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Caio
@@ -21,39 +20,36 @@ public class cadastro extends javax.swing.JFrame {
     public cadastro() {
         initComponents();
         bt_cadastrar.setBackground(Color.blue);
-    }  
+    }
     /**
      *
      * @return
      */
-    
+
     String usuario;
     String tipo;
     String email;
     String cpf;
     String senha;
     atri at = new atri();
-    
-    public boolean verifyFields()
-    {
+
+    public boolean verifyFields() {
         usuario = txt_usuario.getText();
         email = txt_email.getText();
         cpf = txt_cpf.getText();
         senha = String.valueOf(txt_senha.getPassword());
         tipo = String.valueOf(caixa_hierarquia.getSelectedItem());
-        
+
         // check empty fields
-        
-        if(usuario.trim().equals("") || email.trim().equals("") || cpf.trim().equals("")
-           || senha.trim().equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Um ou mais campos estão vazios","Campos Vazios",2);
+        if (usuario.trim().equals("") || email.trim().equals("") || cpf.trim().equals("") || senha.trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Um ou mais campos estão vazios", "Campos Vazios", 2);
             return false;
-        } else if(usuario.equals(at.getUsuario()) || email.equals(atri.getEmail()) || cpf.equals(atri.getCpf())){
-            
+        } else if (usuario.equals(at.getUsuario()) || email.equals(atri.getEmail()) || cpf.equals(atri.getCpf())) {
             JOptionPane.showMessageDialog(null, "Usuário, email ou CPF informados já foram cadastrados!", "Erro", 2);
-            
-        }else{
+            return false;
+        } else if (!Validador.cpf(cpf)) {
+            JOptionPane.showMessageDialog(null, cpf+ "CPF Informado valido!", "Erro", 2);
+        } else {
             
             at.setUsuario(usuario);
             at.setSenha(senha);
@@ -67,7 +63,7 @@ public class cadastro extends javax.swing.JFrame {
             this.dispose();
         }
         return true;
-    } 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -202,7 +198,7 @@ public class cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_senhaActionPerformed
 
     private void lbl_voltarCadastroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_voltarCadastroMouseEntered
-         lbl_voltarCadastro.setForeground(Color.WHITE);
+        lbl_voltarCadastro.setForeground(Color.WHITE);
     }//GEN-LAST:event_lbl_voltarCadastroMouseEntered
 
     private void lbl_voltarCadastroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_voltarCadastroMouseExited
@@ -247,7 +243,7 @@ public class cadastro extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
